@@ -1,0 +1,10 @@
+namespaces:
+  argocd:
+    owner: platform
+    project: platform
+  kagent:
+    owner: platform
+    project: platform
+  kmcp-system:
+    owner: platform
+    project: platform

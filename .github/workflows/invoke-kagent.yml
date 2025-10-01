@@ -1,0 +1,25 @@
+name: GioOps semantic validation
+
+on:
+  pull_request:
+
+jobs:
+  invoke-kagent:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install KAgent
+        run: |
+          export DESIRED_VERSION=v0.4.5
+          curl -fsSL https://raw.githubusercontent.com/kagent-dev/kagent/v0.4.5/scripts/get-kagent | bash
+
+      - name: Invoke KAgent
+        id: kagent
+        run: |
+          kagent --api-url "http://smart-idp.uk/api" invoke --agent gitops-agent --file demo-cluster/.k8s-gen/manifests.yaml   | jq -r '.artifacts[0].parts[0].text'

@@ -1,0 +1,13 @@
+environment:
+  name: demo-cluster
+
+teams:
+  platform:
+    clusterAdmin: true
+
+argocd:
+  namespace: argocd
+
+gitops:
+  repository: https://github.com/qasmi/oss-japan-demo.git
+  revisionHistoryLimit: 3
